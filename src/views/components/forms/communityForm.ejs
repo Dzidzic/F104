@@ -1,0 +1,102 @@
+<style>
+    .community-form {
+        max-width: 600px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .input-error {
+        border: 1px solid red;
+    }
+
+    .error-msg {
+        color: red;
+        font-size: 0.8rem;
+    }
+
+    .hint {
+        font-size: 0.75rem;
+        color: #666;
+    }
+</style>
+
+<form method="POST" action="<%= formAction %>" class="community-form">
+
+    <div class="form-group">
+        <label for="name">Nazwa społeczności</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            value="<%= validator.name !== 'invalid' ? validator.name !== 'taken' ? validator.name : '' : '' %>"
+            class="<%= validator.name === 'invalid' ? 'input-error' : '' %>"
+        >
+        <% if (validator.name === 'invalid') { %>
+            <small class="error-msg">Błąd! Dopuszczalna nazwa: 3-50 znaków, bez spacji oraz znaków spcjalnych</small>
+        <% } else if (validator.name === 'taken') { %>
+            <small class="error-msg">Społeczność pod taką nazwą już istnieje</small>
+        <% } %>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Opis społeczności</label>
+        <textarea
+            id="description"
+            name="description"
+            rows="4"
+            class="<%= validator?.description === 'invalid' ? 'input-error' : '' %>"
+        ><%= validator.description !== 'invalid' ? validator.description : '' %></textarea>
+        <% if (validator.description === 'invalid') { %>
+            <small class="error-msg">Opis musi zawierać od 10 do 500 znaków</small>
+        <% } %>
+    </div>
+
+    <div class="form-group">
+        <label for="theme">Tematyka społeczności</label>
+        <select id="theme" name="theme" class="<%= validator.theme === 'invalid' ? 'input-error' : '' %>">
+            <% const themes = ["----------------", "Programowanie", "Gry", "Sport", "Kultura", "Inna"]; %>
+            <% themes.forEach(theme => { %>
+                <option 
+                    value="<%= theme %>" 
+                    <%= validator.theme === theme ? "selected" : "" %>
+                >         
+                    <%= theme %>
+                </option>
+            <% }) %>
+        </select>
+        <% if (validator.theme === 'invalid') { %>
+            <small class="error-msg">Wybierz tematykę społeczności</small>
+        <% } %>
+
+        <div id="custom-theme" style="margin-top: 8px; display: <%= validator.theme === 'Inna' ? 'block' : 'none' %>;">
+            <input
+                type="text"
+                name="customTheme"
+                placeholder="Wpisz własną tematykę"
+                value="<%= validator.customTheme !== 'invalid' ? validator.customTheme : '' %>"
+                class="<%= validator.customTheme === 'invalid' ? 'input-error' : '' %>"
+            >
+            <% if (validator.customTheme === 'invalid') { %>
+                <small class="error-msg">Podaj własną tematykę</small>
+            <% } %>
+        </div>
+    </div>
+
+    <button type="submit"><%= formAction.includes("edit") ? "Edytuj społeczność" : "Utwórz społeczność" %></button>
+</form>
+
+<script>
+    const themeSelect = document.getElementById('theme');
+    const customDiv = document.getElementById('custom-theme');
+
+    themeSelect.addEventListener('change', () => {
+        if (themeSelect.value === 'Inna') {
+            customDiv.style.display = 'block';
+        } else {
+            customDiv.style.display = 'none';
+        }
+    });
+</script>
+

@@ -1,0 +1,54 @@
+<style>
+    .input-error {
+        border-color: red;
+    }
+
+    .error-msg {
+        color: red;
+        font-size: 0.8rem;
+    }
+</style>
+
+<form method="POST" action="/auth/login" class="auth-form">
+
+    <div class="form-group">
+        <label for="login">Nazwa użytkownika lub e-mail</label>
+        <input
+            type="text"
+            id="login"
+            name="login"
+            value="<%= validator.login !== 'invalid' ? validator.login : '' %>"
+            class="<%= validator.login === 'invalid' ? 'input-error' : '' %>"
+            required
+            autocomplete="username"
+        >
+
+        <% if (validator.login === 'invalid') { %>
+            <small class="error-msg">
+                Nieprawidłowa nazwa użytkownika lub e-mail
+            </small>
+        <% } %>
+    </div>
+
+    <!-- HASŁO -->
+    <div class="form-group">
+        <label for="password">Hasło</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            class="<%= validator.password === 'invalid' ? 'input-error' : '' %>"
+            required
+            autocomplete="current-password"
+        >
+
+        <% if (validator.password === 'invalid') { %>
+            <small class="error-msg">
+                Nieprawidłowe hasło
+            </small>
+        <% } %>
+    </div>
+
+    <button type="submit">Zaloguj się</button>
+
+</form>

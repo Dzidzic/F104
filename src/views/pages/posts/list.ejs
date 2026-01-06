@@ -1,0 +1,59 @@
+<style>
+    .tags {
+        margin-top: 1rem;
+    }
+
+    .tag {
+        display: inline-block;
+        background: #eee;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        margin-right: 4px;
+    }
+
+    .likes-display {
+        font-weight: bold;
+    }
+</style>
+
+<% if (!posts || posts.length === 0) { %>
+    <p>Brak postów w tej społeczności 😕</p>
+<% } else { %>
+    <div class="posts-list">
+        <% posts.forEach(post => { %>
+            <div class="post-item" style="border:1px solid #ccc; padding:12px; margin-bottom:12px;">
+                
+                <h2>
+                    <a href="/c/<%= commUrlId %>/post/<%= post.urlId %>"><%= post.title %></a>
+                </h2>
+
+                <% if (post.isSpoiler) { %>
+                    <p><strong>SPOILER</strong></p>
+                <% } else { %>
+                    <p><%= post.content %></p>
+                <% } %>
+
+                <span class="likes-display">
+                    Likes: <%= post.likesCount  %>
+                </span>
+
+                <% if (post.tags && post.tags.length > 0) { %>
+                    <div class="tags">
+                        <% post.tags.forEach(tag => { %>
+                            <span class="tag">#<%= tag %></span>
+                        <% }) %>
+                    </div>
+                <% } %>
+
+                <div style="font-size: 0.85em; color: #666; margin-top: 10px;">
+                    Autor: <strong><%= post.author %></strong>
+                    <% if (post.createdAt) { %>
+                        • <%= new Date(post.createdAt).toLocaleString("pl-PL") %>
+                    <% } %>
+                </div>
+
+            </div>
+        <% }) %>
+    </div>
+<% } %>

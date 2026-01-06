@@ -1,0 +1,43 @@
+<style>
+  .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      border-bottom: 1px solid #ccc;
+  }
+
+  .nav-left a,
+  .nav-right a {
+      margin-right: 12px;
+      text-decoration: none;
+  }
+
+  .welcome {
+      margin-right: 12px;
+  }
+
+</style>
+
+<header class="main-header">
+    <nav class="nav-left">
+        <a href="/">Główna</a>
+        <a href="/about">O projekcie</a>
+        <% if (user) { %>
+            <a href="/c/add">Dodaj społeczność</a>
+        <% } %>
+    </nav>
+
+    <nav class="nav-right">
+        <% if (!user) { %>
+            <a href="/auth/login">Zaloguj</a>
+            <a href="/auth/register">Rejestracja</a>
+        <% } else { %>
+            <span class="welcome">
+                Witaj <strong><%= user.username %></strong>!
+            </span>
+            <a href="/user/<%= user.username %>">Profil</a>
+            <a href="/auth/logout">Wyloguj</a>
+        <% } %>
+    </nav>
+</header>

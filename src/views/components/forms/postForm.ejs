@@ -1,0 +1,80 @@
+<style>
+    .post-form {
+        max-width: 700px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .input-error {
+        border: 1px solid red;
+    }
+
+    .error-msg {
+        color: red;
+        font-size: 0.8rem;
+    }
+
+    .hint {
+        font-size: 0.75rem;
+        color: #666;
+    }
+</style>
+
+<form method="POST" action="<%= formAction %>" class="post-form">
+    <div class="form-group">
+        <label for="title">Tytuł posta</label>
+        <input
+            type="text"
+            id="title"
+            name="title"
+            value="<%= validator.title !== 'invalid' && validator.title !== 'taken' ? validator.title : '' %>"
+            class="<%= validator.title === 'invalid' ? 'input-error' : '' %>"
+        >
+        <% if (validator.title === 'invalid') { %>
+            <small class="error-msg">Tytuł musi mieć od 5 do 50 znaków</small>
+        <% } %>
+        <% if (validator.title === 'taken') { %>
+            <small class="error-msg">Podany tytuł jest już zajęty</small>
+        <% } %>
+    </div>
+    <div class="form-group">
+        <label for="content">Treść posta</label>
+        <textarea
+            id="content"
+            name="content"
+            rows="6"
+            class="<%= validator.content === 'invalid' ? 'input-error' : '' %>"
+        ><%= validator.content !== 'invalid' ? validator.content : '' %></textarea>
+        <% if (validator.content === 'invalid') { %>
+            <small class="error-msg">Treść musi mieć pomiędzy 20 a 5000 znaków</small>
+        <% } %>
+    </div>
+    <div class="form-group">
+        <label for="tags">Tagi (opcjonalnie)</label>
+        <input
+            type="text"
+            id="tags"
+            name="tags"
+            placeholder="np. express, backend"
+            value="<%= validator.tags !== 'invalid' ? validator.tags : '' %>"
+            class="<%= validator.tags === 'invalid' ? 'input-error' : '' %>"
+        >
+        <% if (validator.tags === 'invalid') { %>
+            <small class="error-msg">Nieprawidłowe tagi</small>
+        <% } %>
+        <div class="hint">Maks. 5 tagów, oddzielone przecinkami</div>
+    </div>
+    <div class="form-group">
+        <label>
+            <input
+                type="checkbox"
+                name="spoiler"
+                <%= validator.spoiler === true ? "checked" : "" %>
+            >
+            Zawiera spoilery
+        </label>
+    </div>
+    <button type="submit"><% if (formAction.includes('/edit')) { %>Zapisz zmiany<% } else { %>Dodaj post<% } %></button>
+</form>

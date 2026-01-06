@@ -1,0 +1,87 @@
+<style>
+    .delete-btn {
+        background: none;
+        border: none;
+        color: #c00;
+        cursor: pointer;
+        font-size: 0.85rem;
+    }
+
+    .delete-btn:hover {
+        text-decoration: underline;
+    }
+
+    .sort-form {
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .sort-form select,
+    .sort-form button {
+        margin-left: 4px;
+    }
+
+</style>
+
+<h1>
+    Społeczność: <%= communityInfo.name %>
+    <% if(user && user.id == communityInfo.creatorId) { %>        
+        <a href="<%= commUrlId %>/edit"><button>Edytuj</button></a> 
+        <form
+            method="POST"
+            action="<%= commUrlId %>/delete"
+            onsubmit="return confirm('Czy na pewno chcesz usunąć tę społeczność? Tej operacji nie da się cofnąć!')"
+        >
+            <button type="submit" class="delete-btn">
+                [Usuń społeczność]
+            </button>
+        </form>
+    <% } %>
+</h1>
+
+<p>
+    Stworzona przez: <strong><%= creatorName %></strong>
+</p>
+
+<p style="color: #555;">
+    <%= communityInfo.description %>
+</p>
+
+<div class="theme">
+    <a href="/c?theme=<%= communityInfo.theme %>" class="theme">
+        <%= communityInfo.theme %>
+    </a>
+</div>
+
+<% if(user) { %>
+    <a href="<%= commUrlId %>/post/add"><button>Dodaj post</button></a>
+<% } %>
+
+<h2>Lista postów</h2>
+
+<form method="GET" class="sort-form">
+    <input
+        type="text"
+        name="tag"
+        placeholder="Filtruj po tagu..."
+        value="<%= tagFilter || '' %>"
+    >
+  
+    <label for="sortBy">Sortuj po:</label>
+
+    <select name="sortBy" id="sortBy">
+        <option value="date" <%= sortBy === "date" ? "selected" : "" %>>Data dodania</option>
+        <option value="title" <%= sortBy === "title" ? "selected" : "" %>>Tytuł</option>
+        <option value="likes" <%= sortBy === "likes" ? "selected" : "" %>>Liczba polubień</option>
+    </select>
+
+    <select name="order">
+        <option value="desc" <%= order === -1 ? "selected" : "" %>>Malejąco</option>
+        <option value="asc" <%= order === 1 ? "selected" : "" %>>Rosnąco</option>
+    </select>
+
+    <button type="submit">Sortuj</button>
+</form>
+<div style="border: 1px black solid; width: 50%; padding: 10px;">
+    <%- include('../posts/list.ejs', { posts: posts }) %>
+</div>

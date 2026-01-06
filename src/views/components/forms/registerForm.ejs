@@ -1,0 +1,108 @@
+<style>
+    .input-error {
+        border-color: red;
+    }
+
+    .error-msg {
+        color: red;
+        font-size: 0.8rem;
+    }
+
+    .password-info {
+        font-size: 0.8rem;
+        color: #555;
+        margin-top: 8px;
+    }
+
+    .password-info ul {
+        margin: 0;
+        padding-left: 16px;
+    }
+
+    .password-info li {
+        list-style-type: disc;
+    }
+
+</style>
+
+<form method="POST" action="/auth/register" class="auth-form">
+    <div class="form-group">
+        <label for="username">Nazwa użytkownika</label>
+        <input
+            type="text"
+            id="username"
+            name="username"
+            value="<%= validator.username !== 'invalid' && validator.username !== 'userExist' ? validator.username : '' %>"
+            class="<%= validator.username === 'invalid' || validator.username === 'userExist' ? 'input-error' : '' %>"
+            required
+            minlength="3"
+            maxlength="20"
+            autocomplete="username"
+        >
+        <% if (validator.username === 'invalid') { %>
+            <small class="error-msg">Nazwa użytkownika jest nieprawidłowa</small>
+        <% } %>
+        <% if (validator.username === 'userExist') { %>
+            <small class="error-msg">W naszym serwisie istnieje już użytkownik z taką nazwą bądź emailem</small>
+        <% } %>
+    </div>
+    <div class="form-group">
+        <label for="email">Adres e-mail</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            value="<%= validator.email !== 'invalid' && validator.email !== 'userExist' ? validator.email : '' %>"
+            class="<%= validator.email === 'invalid' || validator.email === 'userExist' ? 'input-error' : '' %>"
+            required
+            autocomplete="email"
+        >
+        <% if (validator.email === 'invalid') { %>
+            <small class="error-msg">Nieprawidłowy adres e-mail</small>
+        <% } %>
+        <% if (validator.email === 'userExist') { %>
+            <small class="error-msg">W naszym serwisie istnieje już użytkownik z taką nazwą bądź emailem</small>
+        <% } %>
+    </div>
+    <div class="form-group">
+        <label for="password">Hasło*</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            class="<%= validator.password === 'invalid' ? 'input-error' : '' %>"
+            required
+            minlength="8"
+            autocomplete="new-password"
+        >
+        <% if (validator.password === 'invalid') { %>
+            <small class="error-msg">Nie spełniono wszystkich wymagań</small>
+        <% } %>
+    </div>
+    <div class="form-group">
+        <label for="passwordConfirm">Powtórz hasło</label>
+        <input
+            type="password"
+            id="passwordConfirm"
+            name="passwordConfirm"
+            class="<%= validator.passwordConfirm === 'invalid' ? 'input-error' : '' %>"
+            required
+            minlength="8"
+            autocomplete="new-password"
+        >
+        <% if (validator.passwordConfirm === 'invalid') { %>
+            <small class="error-msg">Hasła muszą być identyczne</small>
+        <% } %>
+    </div>
+    <button type="submit">Zarejestruj się</button>
+    <div class="password-info">
+    <p><small>*Wymagania do hasła:</small></p>
+    <ul>
+        <li>Minimum 8 znaków</li>
+        <li>Przynajmniej 1 mała litera</li>
+        <li>Przynajmniej 1 duża litera</li>
+        <li>Przynajmniej 1 cyfra</li>
+        <li>Przynajmniej 1 znak specjalny (!@#$%^&*)</li>
+    </ul>
+</div>
+</form>

@@ -1,0 +1,27 @@
+<h1>Społeczności</h1>
+
+<% if (communities.length === 0) { %>
+    <p>Brak społeczności</p>
+<% } else { %>
+    <ul class="communities-list">
+        <% communities.forEach(community => { %>
+            <li class="community-item">
+                <h2>
+                    <a href="/c/<%= community.urlId %>">
+                        c/<%= community.name %>
+                    </a>
+                </h2>
+
+                <p><%= community.description %></p>
+
+                <% if (community.theme) { %>
+                    <div class="theme">
+                        <a href="/c?theme=<%= community.theme %>" class="theme">
+                            <%= community.theme %>
+                        </a>
+                    </div>
+                <% } %>
+            </li>
+        <% }) %>
+    </ul>
+<% } %>
