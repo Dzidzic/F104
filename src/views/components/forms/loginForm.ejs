@@ -1,54 +1,46 @@
-<style>
-    .input-error {
-        border-color: red;
-    }
-
-    .error-msg {
-        color: red;
-        font-size: 0.8rem;
-    }
-</style>
-
-<form method="POST" action="/auth/login" class="auth-form">
-
-    <div class="form-group">
-        <label for="login">Nazwa użytkownika lub e-mail</label>
+<form method="POST" action="/auth/login" class="authForm">
+    <div class="authGroup">
+        <label for="login" class="authLabel">Nazwa użytkownika lub e-mail</label>
         <input
             type="text"
             id="login"
             name="login"
+            placeholder="Twoja nazwa lub email"
             value="<%= validator.login !== 'invalid' ? validator.login : '' %>"
-            class="<%= validator.login === 'invalid' ? 'input-error' : '' %>"
+            class="authInput <%= validator.login === 'invalid' ? 'inputError' : '' %>"
             required
             autocomplete="username"
         >
 
         <% if (validator.login === 'invalid') { %>
-            <small class="error-msg">
+            <small class="errorMsg">
                 Nieprawidłowa nazwa użytkownika lub e-mail
             </small>
         <% } %>
     </div>
 
-    <!-- HASŁO -->
-    <div class="form-group">
-        <label for="password">Hasło</label>
+    <div class="authGroup">
+        <label for="password" class="authLabel">Hasło</label>
         <input
             type="password"
             id="password"
             name="password"
-            class="<%= validator.password === 'invalid' ? 'input-error' : '' %>"
+            placeholder="••••••••"
+            class="authInput <%= validator.password === 'invalid' ? 'inputError' : '' %>"
             required
             autocomplete="current-password"
         >
 
         <% if (validator.password === 'invalid') { %>
-            <small class="error-msg">
+            <small class="errorMsg">
                 Nieprawidłowe hasło
             </small>
         <% } %>
     </div>
 
-    <button type="submit">Zaloguj się</button>
-
+    <button type="submit" class="submitBtn">Zaloguj się</button>
+    
+    <div class="authFooter">
+        Nie masz konta? <a href="/auth/register">Zarejestruj się</a>
+    </div>
 </form>

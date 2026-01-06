@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 8080
 
 # Domyślne polecenie (produkcyjne)
-#CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"]
 
 # Jeśli chcesz używać nodemon w trybie deweloperskim:
-CMD ["npm", "run", "dev"]
+#CMD ["npm", "run", "dev"]

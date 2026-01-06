@@ -1,3 +1,1150 @@
+:root {
+    --bgColor: #030303;
+    --cardBg: #1a1a1b;
+    --navBg: #1a1a1b;
+    --borderColor: #343536;
+    --textMain: #d7dadc;
+    --textMuted: #818384;
+    --accentColor: #0079d3; /* Klasyczny niebieski Redditowy */
+    --accentHover: #1484d6;
+    --logoutRed: #ff585b;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bgColor);
+    color: var(--textMain);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.mainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 50px;
+    background-color: var(--navBg);
+    border-bottom: 1px solid var(--borderColor);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navLeft, .navRight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mainHeader a {
+    color: var(--textMain);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.mainHeader a:hover {
+    color: var(--accentColor);
+}
+
+.logo {
+    font-size: 20px !important;
+    font-weight: bold !important;
+    color: var(--accentColor) !important;
+    margin-right: 10px;
+}
+
+/* Przyciski w nawigacji */
+.loginBtn {
+    border: 1px solid var(--accentColor);
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+.registerBtn {
+    background-color: var(--textMain);
+    color: var(--bgColor) !important;
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+.logoutLink {
+    color: var(--logoutRed) !important;
+}
+
+/* Kontener główny */
+.contentContainer {
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Footer - Ulepszony */
+.mainFooter {
+    background-color: var(--navBg);
+    border-top: 1px solid var(--borderColor);
+    padding: 24px 0;
+    margin-top: 40px;
+    color: var(--textMuted);
+}
+
+.footerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.footerLinks {
+    display: flex;
+    gap: 20px;
+}
+
+.footerLinks a {
+    color: var(--textMuted);
+    text-decoration: none;
+}
+
+.footerLinks a:hover {
+    text-decoration: underline;
+}
+
+/* Tytuł strony */
+.pageTitle {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* Stan pusty */
+.emptyState {
+    color: var(--textMuted);
+    text-align: center;
+    padding: 40px;
+    background: var(--cardBg);
+    border-radius: 8px;
+    border: 1px solid var(--borderColor);
+}
+
+/* Lista i Karty */
+.communitiesList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Odstęp między kartami */
+}
+
+.communityItem {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+    padding: 16px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.communityItem:hover {
+    border-color: #818384; /* Rozjaśnienie ramki przy hoverze */
+    cursor: pointer;
+}
+
+/* Nagłówek karty */
+.communityHeader h2 a {
+    color: var(--textMain);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.communityHeader h2 a:hover {
+    text-decoration: underline;
+}
+
+/* Opis społeczności */
+.communityDescription {
+    color: var(--textMuted);
+    font-size: 14px;
+    margin: 8px 0 12px 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Tagi/Tematy */
+.communityThemeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.themeTag {
+    background-color: #272729;
+    color: var(--textMain);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.themeTag:hover {
+    background-color: #343536;
+}
+
+/* Kontener dla formularza, by nie był na całą szerokość */
+.formContainer {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: var(--cardBg);
+    padding: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--borderColor);
+}
+
+.communityForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--textMain);
+}
+
+/* Style dla inputów, textarea i selectów */
+.formGroup input, 
+.formGroup textarea, 
+.formGroup select {
+    background-color: #272729; /* Nieco jaśniejsze niż tło karty */
+    border: 1px solid var(--borderColor);
+    color: var(--textMain);
+    padding: 12px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.formGroup input:focus, 
+.formGroup textarea:focus, 
+.formGroup select:focus {
+    border-color: var(--textMain); /* Rozjaśnienie ramki przy pisaniu */
+}
+
+/* Błędy */
+.inputError {
+    border-color: #ea5252 !important;
+}
+
+.errorMsg {
+    color: #ea5252;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Przycisk */
+.submitBtn {
+    background-color: var(--textMain);
+    color: var(--bgColor);
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.submitBtn:hover {
+    opacity: 0.9;
+}
+
+/* Pole specjalne dla tematyki */
+.customThemeWrapper {
+    margin-top: 10px;
+}
+
+/* Nagłówek społeczności */
+.communityHeader {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.communityTitleBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.communityTitle {
+    font-size: 28px;
+    margin: 0;
+}
+
+.communityMeta {
+    color: var(--textMuted);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.communityDescriptionText {
+    font-size: 16px;
+    margin-bottom: 16px;
+    max-width: 800px;
+}
+
+/* Przyciski admina */
+.adminActions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.editBtn {
+    font-size: 13px;
+    color: var(--textMain);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+}
+
+.deleteBtn {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+}
+
+.deleteBtn:hover {
+    text-decoration: underline;
+}
+
+/* Przycisk dodawania posta */
+.addPostBtn {
+    display: inline-block;
+    background-color: var(--accentColor);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.addPostBtn:hover {
+    background-color: var(--accentHover);
+}
+
+/* Sekcja Postów i Sortowanie */
+.postsSection {
+    margin-top: 32px;
+}
+
+.postsHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.sortForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    background: var(--cardBg);
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--borderColor);
+}
+
+.tagFilterInput, .sortForm select {
+    background: #272729;
+    border: 1px solid var(--borderColor);
+    color: var(--textMain);
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+.sortSubmitBtn {
+    background: var(--textMain);
+    color: var(--bgColor);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Kontener na posty (zastępuje ten czarny border 1px) */
+.postsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%; /* Rozszerzyłem do 100%, żeby lepiej wykorzystać miejsce */
+    max-width: 800px; /* Ale trzymamy czytelność */
+}
+
+/* Lista postów */
+.postsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.postItem {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+    padding: 12px 16px;
+    transition: background-color 0.2s;
+    display: flex;
+}
+
+.postItem:hover {
+    background-color: #212122; /* Subtelne rozjaśnienie tła postu */
+    border-color: #474748;
+}
+
+/* Header postu (Autor i Data) */
+.postHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--textMuted);
+    margin-bottom: 8px;
+}
+
+.postAuthor {
+    color: var(--textMain);
+    font-weight: bold;
+}
+
+/* Tytuł */
+.postTitle {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.postTitle a {
+    color: var(--textMain);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.postTitle a:hover {
+    text-decoration: underline;
+}
+
+/* Treść */
+.postBody {
+    font-size: 14px;
+    color: var(--textMain);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+/* Spoiler */
+.spoilerBadge {
+    display: inline-block;
+    background-color: #474748;
+    color: #f63644;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #f63644;
+    margin-bottom: 8px;
+}
+
+.spoilerText {
+    color: var(--textMuted);
+    font-style: italic;
+}
+
+/* Stopka postu (Lajki i Tagi) */
+.postFooter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.likesDisplay {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arrow {
+    color: var(--textMuted);
+    font-size: 10px;
+}
+
+/* Tagi */
+.postTags {
+    display: flex;
+    gap: 8px;
+}
+
+.tagItem {
+    color: var(--accentColor);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tagItem:hover {
+    text-decoration: underline;
+}
+
+.emptyPosts {
+    text-align: center;
+    padding: 40px;
+    color: var(--textMuted);
+}
+
+/* Strona posta */
+.postPage {
+    padding-top: 10px;
+}
+
+.backLink {
+    display: inline-block;
+    color: var(--textMuted);
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: var(--textMain);
+}
+
+.postContainer {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    padding: 24px;
+    border-radius: 8px;
+}
+
+/* Meta dane */
+.postMeta {
+    font-size: 12px;
+    color: var(--textMuted);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.postMeta strong, .communityName {
+    color: var(--textMain);
+}
+
+/* Nagłówek i Akcje */
+.postTitle {
+    font-size: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.authorActions {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.editLink {
+    color: var(--accentColor);
+    text-decoration: none;
+}
+
+/* Treść Posta */
+.postContent {
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--textMain);
+}
+
+/* Spoiler Logic */
+.postContent.spoiler {
+    background-color: #474748;
+    color: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+
+.postContent.spoiler.revealed {
+    color: inherit;
+    background-color: transparent;
+    padding: 0;
+    user-select: text;
+}
+
+/* Like Button */
+.likeForm {
+    display: inline-block;
+}
+
+.likeBtn {
+    background: #272729;
+    border: 1px solid var(--borderColor);
+    color: var(--textMain);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.likeBtn:hover {
+    background: #343536;
+}
+
+.likeBtn.isLiked {
+    border-color: #e0245e;
+    color: #e0245e;
+}
+
+.heartIcon {
+    font-size: 14px;
+}
+
+/* Tagi */
+.postActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--borderColor);
+}
+
+.tagItem {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--accentColor);
+    margin-left: 6px;
+}
+/* --- NOWY FEED SYSTEM --- */
+
+.feedWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.feedCard {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+    display: flex; /* Układ: Głosy | Treść */
+    transition: border-color 0.2s;
+    overflow: hidden;
+}
+
+.feedCard:hover {
+    border-color: #474748;
+}
+
+/* Lewy pasek głosowania */
+.feedVoting {
+    background-color: rgba(255, 255, 255, 0.02);
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 4px;
+    gap: 4px;
+}
+
+.voteArrow {
+    color: var(--textMuted);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.voteCount {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--textMain);
+}
+
+/* Główna treść karty */
+.feedMain {
+    padding: 12px;
+    flex: 1;
+}
+
+.feedMeta {
+    font-size: 12px;
+    color: var(--textMuted);
+    margin-bottom: 8px;
+}
+
+.feedUser {
+    color: var(--textMain);
+    font-weight: 600;
+}
+
+.feedTitle {
+    font-size: 18px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.feedTitle a {
+    color: var(--textMain);
+    text-decoration: none;
+}
+
+.feedTitle a:hover {
+    text-decoration: underline;
+}
+
+.feedBody {
+    font-size: 14px;
+    color: var(--textMain);
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.feedSnippet {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Elementy specjalne */
+.badgeSpoiler {
+    background: #474748;
+    color: #ff4444;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.textHidden {
+    color: var(--textMuted);
+    font-style: italic;
+    font-size: 13px;
+}
+
+.feedFooter {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.feedTags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.feedTag {
+    color: var(--accentColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.feedEmpty {
+    text-align: center;
+    padding: 60px;
+    background: var(--cardBg);
+    border: 1px dashed var(--borderColor);
+    border-radius: 8px;
+}
+
+/* --- EXPLORE COMMUNITIES SYSTEM --- */
+
+.exploreWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.exploreCard {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.1s, border-color 0.2s;
+}
+
+.exploreCard:hover {
+    border-color: var(--textMuted);
+    background-color: #212122;
+}
+
+.exploreContent {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.exploreHeader {
+    margin-bottom: 6px;
+}
+
+.exploreName {
+    font-size: 18px;
+    margin: 0;
+}
+
+.exploreName a {
+    color: var(--accentColor);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.exploreName a:hover {
+    text-decoration: underline;
+}
+
+.exploreDesc {
+    color: var(--textMuted);
+    font-size: 14px;
+    margin: 8px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.exploreThemeBox {
+    margin-top: 10px;
+}
+
+.exploreTag {
+    background-color: #272729;
+    color: var(--textMain);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Przycisk po prawej stronie karty */
+.exploreViewBtn {
+    background-color: transparent;
+    color: var(--textMain);
+    border: 1px solid var(--borderColor);
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.exploreViewBtn:hover {
+    background-color: var(--textMain);
+    color: var(--bgColor);
+}
+
+.exploreEmpty {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--cardBg);
+    border-radius: 8px;
+    color: var(--textMuted);
+}
+
+/* --- ERROR PAGE SYSTEM --- */
+
+.errorPageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Centrowanie w pionie względem kontenera treści */
+    text-align: center;
+}
+
+.errorPageBox {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    padding: 48px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.errorPageIcon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.errorPageStatus {
+    font-size: 72px;
+    margin: 0;
+    color: var(--accentColor);
+    line-height: 1;
+}
+
+.errorPageTitle {
+    font-size: 24px;
+    margin: 16px 0 8px;
+    color: var(--textMain);
+}
+
+.errorPageMessage {
+    color: var(--textMuted);
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.errorPageBtn {
+    display: inline-block;
+    background-color: var(--accentColor);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.errorPageBtn:hover {
+    background-color: var(--accentHover);
+}
+
+/* Responsywność dla mniejszych ekranów */
+@media (max-width: 480px) {
+    .errorPageBox {
+        padding: 32px 20px;
+        border: none;
+        background: transparent;
+    }
+}
+
+/* --- ABOUT PAGE SYSTEM --- */
+
+.aboutPageWrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.aboutPageHeader {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.aboutPageTitle {
+    font-size: 36px;
+    color: var(--accentColor);
+    margin-bottom: 12px;
+}
+
+.aboutPageSubtitle {
+    font-size: 18px;
+    color: var(--textMuted);
+}
+
+.aboutPageContent {
+    background-color: var(--cardBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 8px;
+    padding: 40px;
+    line-height: 1.8; /* Większy interlinia dla lepszej czytelności */
+}
+
+.aboutPageSection {
+    margin-bottom: 32px;
+}
+
+.aboutPageSection:last-child {
+    margin-bottom: 0;
+}
+
+.aboutPageSection h2 {
+    color: var(--textMain);
+    font-size: 22px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--accentColor);
+    padding-left: 15px;
+}
+
+.aboutPageSection p {
+    color: var(--textMain);
+    opacity: 0.9;
+    margin-bottom: 16px;
+}
+
+.aboutPageFooter {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.aboutPageBackBtn {
+    display: inline-block;
+    border: 1px solid var(--accentColor);
+    color: var(--accentColor);
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.aboutPageBackBtn:hover {
+    background-color: var(--accentColor);
+    color: white;
+}
+
+/* Responsywność */
+@media (max-width: 600px) {
+    .aboutPageContent {
+        padding: 24px;
+        background-color: transparent;
+        border: none;
+    }
+}
+
+/* --- AUTH SYSTEM --- */
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.authGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.authLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--textMain);
+}
+
+.authInput {
+    background-color: #272729 !important; /* Wymuszamy ciemne tło */
+    border: 1px solid var(--borderColor);
+    color: var(--textMain);
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.authInput:focus {
+    border-color: var(--accentColor);
+}
+
+/* Link pod przyciskiem */
+.authFooter {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--textMuted);
+}
+
+.authFooter a {
+    color: var(--accentColor);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.authFooter a:hover {
+    text-decoration: underline;
+}
+
+/* Specyficzne dla błędów w auth */
+.authInput.inputError {
+    border-color: #ff4444 !important;
+}
+
+/* --- REGISTRATION SPECIFIC --- */
+
+.authPasswordRequirements {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    border: 1px solid var(--borderColor);
+}
+
+.authPasswordRequirements p {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--textMuted);
+    margin: 0 0 8px 0;
+}
+
+.requirementsList {
+    margin: 0;
+    padding-left: 18px;
+    list-style-type: disc;
+}
+
+.requirementsList li {
+    font-size: 11px;
+    color: var(--textMuted);
+    margin-bottom: 4px;
+}
+
+/* Hover efekt dla pól w rejestracji */
+.authInput:hover {
+    border-color: #474748;
 }

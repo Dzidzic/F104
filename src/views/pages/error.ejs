@@ -1,3 +1,19 @@
-<h1>Błąd <%= status %></h1>
-<p><%= message %></p>
-<p><a href="/">Powrót do strony głównej</a></p>
+<div class="errorPageContainer">
+    <div class="errorPageBox">
+        <div class="errorPageIcon">
+            <% if (status === 404) { %>
+                🔍
+            <% } else { %>
+                ⚠️
+            <% } %>
+        </div>
+        
+        <h1 class="errorPageStatus"><%= status %></h1>
+        <h2 class="errorPageTitle">Coś poszło nie tak...</h2>
+        <p class="errorPageMessage"><%= message %></p>
+        
+        <div class="errorPageActions">
+            <a href="/" class="errorPageBtn">Powrót do strony głównej</a>
+        </div>
+    </div>
+</div>

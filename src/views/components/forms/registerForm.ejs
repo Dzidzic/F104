@@ -1,108 +1,93 @@
-<style>
-    .input-error {
-        border-color: red;
-    }
 
-    .error-msg {
-        color: red;
-        font-size: 0.8rem;
-    }
-
-    .password-info {
-        font-size: 0.8rem;
-        color: #555;
-        margin-top: 8px;
-    }
-
-    .password-info ul {
-        margin: 0;
-        padding-left: 16px;
-    }
-
-    .password-info li {
-        list-style-type: disc;
-    }
-
-</style>
-
-<form method="POST" action="/auth/register" class="auth-form">
-    <div class="form-group">
-        <label for="username">Nazwa użytkownika</label>
+<form method="POST" action="/auth/register" class="authForm">
+    <div class="authGroup">
+        <label for="username" class="authLabel">Nazwa użytkownika</label>
         <input
             type="text"
             id="username"
             name="username"
+            placeholder="np. explorer_12"
             value="<%= validator.username !== 'invalid' && validator.username !== 'userExist' ? validator.username : '' %>"
-            class="<%= validator.username === 'invalid' || validator.username === 'userExist' ? 'input-error' : '' %>"
+            class="authInput <%= validator.username === 'invalid' || validator.username === 'userExist' ? 'inputError' : '' %>"
             required
             minlength="3"
             maxlength="20"
             autocomplete="username"
         >
         <% if (validator.username === 'invalid') { %>
-            <small class="error-msg">Nazwa użytkownika jest nieprawidłowa</small>
+            <small class="errorMsg">Nazwa użytkownika jest nieprawidłowa</small>
         <% } %>
         <% if (validator.username === 'userExist') { %>
-            <small class="error-msg">W naszym serwisie istnieje już użytkownik z taką nazwą bądź emailem</small>
+            <small class="errorMsg">Ta nazwa użytkownika jest już zajęta</small>
         <% } %>
     </div>
-    <div class="form-group">
-        <label for="email">Adres e-mail</label>
+
+    <div class="authGroup">
+        <label for="email" class="authLabel">Adres e-mail</label>
         <input
             type="email"
             id="email"
             name="email"
+            placeholder="twoj@email.pl"
             value="<%= validator.email !== 'invalid' && validator.email !== 'userExist' ? validator.email : '' %>"
-            class="<%= validator.email === 'invalid' || validator.email === 'userExist' ? 'input-error' : '' %>"
+            class="authInput <%= validator.email === 'invalid' || validator.email === 'userExist' ? 'inputError' : '' %>"
             required
             autocomplete="email"
         >
         <% if (validator.email === 'invalid') { %>
-            <small class="error-msg">Nieprawidłowy adres e-mail</small>
+            <small class="errorMsg">Nieprawidłowy adres e-mail</small>
         <% } %>
         <% if (validator.email === 'userExist') { %>
-            <small class="error-msg">W naszym serwisie istnieje już użytkownik z taką nazwą bądź emailem</small>
+            <small class="errorMsg">Ten adres e-mail jest już zarejestrowany</small>
         <% } %>
     </div>
-    <div class="form-group">
-        <label for="password">Hasło*</label>
+
+    <div class="authGroup">
+        <label for="password" class="authLabel">Hasło</label>
         <input
             type="password"
             id="password"
             name="password"
-            class="<%= validator.password === 'invalid' ? 'input-error' : '' %>"
+            placeholder="Wpisz bezpieczne hasło"
+            class="authInput <%= validator.password === 'invalid' ? 'inputError' : '' %>"
             required
             minlength="8"
             autocomplete="new-password"
         >
         <% if (validator.password === 'invalid') { %>
-            <small class="error-msg">Nie spełniono wszystkich wymagań</small>
+            <small class="errorMsg">Hasło nie spełnia wymagań</small>
         <% } %>
     </div>
-    <div class="form-group">
-        <label for="passwordConfirm">Powtórz hasło</label>
+
+    <div class="authGroup">
+        <label for="passwordConfirm" class="authLabel">Powtórz hasło</label>
         <input
             type="password"
             id="passwordConfirm"
             name="passwordConfirm"
-            class="<%= validator.passwordConfirm === 'invalid' ? 'input-error' : '' %>"
+            placeholder="Wpisz hasło ponownie"
+            class="authInput <%= validator.passwordConfirm === 'invalid' ? 'inputError' : '' %>"
             required
             minlength="8"
             autocomplete="new-password"
         >
         <% if (validator.passwordConfirm === 'invalid') { %>
-            <small class="error-msg">Hasła muszą być identyczne</small>
+            <small class="errorMsg">Hasła muszą być identyczne</small>
         <% } %>
     </div>
-    <button type="submit">Zarejestruj się</button>
-    <div class="password-info">
-    <p><small>*Wymagania do hasła:</small></p>
-    <ul>
-        <li>Minimum 8 znaków</li>
-        <li>Przynajmniej 1 mała litera</li>
-        <li>Przynajmniej 1 duża litera</li>
-        <li>Przynajmniej 1 cyfra</li>
-        <li>Przynajmniej 1 znak specjalny (!@#$%^&*)</li>
-    </ul>
-</div>
+
+    <button type="submit" class="submitBtn">Zarejestruj się</button>
+
+    <div class="authPasswordRequirements">
+        <p>Hasło musi zawierać:</p>
+        <ul class="requirementsList">
+            <li>Minimum 8 znaków</li>
+            <li>Małą i dużą literę</li>
+            <li>Cyfrę oraz znak specjalny (!@#$%^&*)</li>
+        </ul>
+    </div>
+
+    <div class="authFooter">
+        Masz już konto? <a href="/auth/login">Zaloguj się</a>
+    </div>
 </form>

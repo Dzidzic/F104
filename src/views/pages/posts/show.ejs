@@ -1,135 +1,65 @@
-<style>
-    .post-container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .post-meta {
-        color: #666;
-        font-size: 0.8rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .post-title {
-        font-size: 1.6rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .post-content {
-        margin-top: 1rem;
-        white-space: pre-wrap;
-    }
-
-    .spoiler {
-        background: #000;
-        color: transparent;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .spoiler.revealed {
-        color: inherit;
-        background: none;
-    }
-
-    .tags {
-        margin-top: 1rem;
-    }
-
-    .tag {
-        display: inline-block;
-        background: #eee;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        margin-right: 4px;
-    }
-
-    .like-form {
-        display: inline;
-    }
-
-    .like-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 0.9rem;
-        color: #555;
-    }
-
-    .like-btn.liked {
-        color: #e0245e;
-        font-weight: bold;
-    }
-
-    .delete-btn {
-        background: none;
-        border: none;
-        color: #c00;
-        cursor: pointer;
-        font-size: 0.85rem;
-    }
-
-    .delete-btn:hover {
-        text-decoration: underline;
-    }
-</style>
-
-<div class="post-page">
-    <a href="/c/<%= commUrlId %>" class="back-link" style="margin: 20px">
-        ← Wróć do społeczności <strong><%= post.communityName %></strong>
+<div class="postPage">
+    <a href="/c/<%= commUrlId %>" class="backLink">
+        ← Wróć do <strong>c/<%= communityName %></strong>
     </a>
-    <div class="post-container">
-        <div class="post-meta">
-            c/<strong><%= communityName %></strong>
-            • Autor: <%= post.author %>
-            • <%= new Date(post.createdAt).toLocaleString("pl-PL") %>
-        </div>
 
-        <h1 class="post-title">
+    <article class="postContainer">
+        <header class="postMeta">
+            <span class="communityName">c/<%= communityName %></span>
+            <span class="separator">•</span>
+            <span class="postAuthor">u/<%= post.author %></span>
+            <span class="separator">•</span>
+            <span class="postDate"><%= new Date(post.createdAt).toLocaleString("pl-PL") %></span>
+        </header>
+
+        <h1 class="postTitle">
             <%= post.title %>
             <% if (post.isSpoiler) { %>
-                <span style="color:red; font-size:0.8rem;">[SPOILER]</span>
+                <span class="spoilerBadge">[SPOILER]</span>
             <% } %>
+            
             <% if (user && post.authorId.toString() === user.id) { %>
-                <a href="/c/<%= commUrlId %>/post/<%= post.urlId %>/edit" style="font-size:0.6rem; margin-left:10px;">[EDYTUJ]</a>
-                <form
-                    method="POST"
-                    action="/c/<%= commUrlId %>/post/<%= post.urlId %>/delete"
-                    onsubmit="return confirm('Czy na pewno chcesz usunąć ten post?')"
-                    style="display:inline;"
-                >
-                    <button type="submit" class="delete-btn">
-                        [Usuń post]
-                    </button>
-                </form>
+                <div class="authorActions">
+                    <a href="/c/<%= commUrlId %>/post/<%= post.urlId %>/edit" class="editLink">[EDYTUJ]</a>
+                    <form
+                        method="POST"
+                        action="/c/<%= commUrlId %>/post/<%= post.urlId %>/delete"
+                        onsubmit="return confirm('Czy na pewno chcesz usunąć ten post?')"
+                        class="inlineForm"
+                    >
+                        <button type="submit" class="deleteBtn">
+                            [Usuń post]
+                        </button>
+                    </form>
+                </div>
             <% } %>
         </h1>
 
-        <div class="post-content <%= post.isSpoiler ? 'spoiler' : '' %>" id="postContent">
+        <div class="postContent <%= post.isSpoiler ? 'spoiler' : '' %>" id="postContent">
             <%= post.content %>
         </div>
 
-        <form method="POST" action="/c/<%= commUrlId %>/post/<%= post.urlId %>/like" class="like-form">
-            <button type="submit" class="like-btn <%= isLiked ? 'liked' : '' %>">
-                Likes: <%= post.likesCount %>
-            </button>
-        </form>
+        <div class="postActions">
+            <form method="POST" action="/c/<%= commUrlId %>/post/<%= post.urlId %>/like" class="likeForm">
+                <button type="submit" class="likeBtn <%= isLiked ? 'isLiked' : '' %>">
+                    <span class="heartIcon"><%= isLiked ? '❤️' : '🤍' %></span>
+                    <span class="likesCount">Likes: <%= post.likesCount %></span>
+                </button>
+            </form>
 
-        <% if (post.tags && post.tags.length > 0) { %>
-            <div class="tags">
-                <% post.tags.forEach(tag => { %>
-                    <span class="tag">#<%= tag %></span>
-                <% }) %>
-            </div>
-        <% } %>
-
-    </div>
+            <% if (post.tags && post.tags.length > 0) { %>
+                <div class="postTags">
+                    <% post.tags.forEach(tag => { %>
+                        <span class="tagItem">#<%= tag %></span>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+    </article>
 </div>
 
 <script>
     const spoiler = document.getElementById("postContent");
-
     if (spoiler && spoiler.classList.contains("spoiler")) {
         spoiler.addEventListener("click", () => {
             spoiler.classList.toggle("revealed");

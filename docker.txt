@@ -1,0 +1,38 @@
+============================================================
+INSTRUKCJA URUCHOMIENIA ŚRODOWISKA (DOCKER) - PROJEKT F104
+============================================================
+
+Projekt wykorzystuje konteneryzację do odizolowania aplikacji od bazy danych.
+Poniżej znajdują się instrukcje uruchomienia za pomocą Docker Compose 
+(zalecane) oraz alternatywnie za pomocą czystych komend Docker Run.
+
+------------------------------------------------------------
+1. DANE LOGOWANIA I PORTY (KONFIGURACJA DOMYŚLNA)
+------------------------------------------------------------
+
+BAZA DANYCH (MongoDB):
+- Port wewnętrzny kontenera: 27017
+- Port zewnętrzny (host): 27018 (dostęp do bazy np. przez MongoDB Compass)
+- Użytkownik (root): Zdefiniowany w zmiennej ${MONGO_USER}
+- Hasło (root): Zdefiniowane w zmiennej ${MONGO_PASSWORD}
+
+APLIKACJA (Node.js):
+- Port wewnętrzny kontenera: 8080
+- Port zewnętrzny (host): 8080
+- Adres URL: http://localhost:8080
+
+------------------------------------------------------------
+2. URUCHOMIENIE ZA POMOCĄ DOCKER-COMPOSE (ZALECANE)
+------------------------------------------------------------
+
+Wymagany plik: docker-compose.yml oraz .env w głównym katalogu.
+
+Komenda uruchamiająca:
+$ docker-compose up -d --build
+
+Opis:
+- Flaga '-d' uruchamia kontenery w tle (detached mode).
+- Flaga '--build' wymusza przebudowanie obrazu aplikacji przy zmianach w kodzie.
+
+Zatrzymanie środowiska:
+$ docker-compose down

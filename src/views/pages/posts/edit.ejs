@@ -1,3 +1,8 @@
-<h1>Edytuj post</h1>
-<h3>Społeczność: <%= communityName %></h3>
-<%- include('../../components/forms/postForm.ejs', { validator: validator, formAction: formAction }) %>
+<div class="formContainer">
+    <header class="formHeader">
+        <h1 class="pageTitle">Edytuj post</h1>
+        <p class="formSubtitle">Społeczność: <strong>c/<%= communityName %></strong></p>
+    </header>
+
+    <%- include('../../components/forms/postForm.ejs', { validator: validator, formAction: formAction }) %>
+</div>

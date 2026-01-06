@@ -1,15 +1,14 @@
 {
-  "name": "f104",
+  "name": "DitRed",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Platforma społecznościowa wzorowana na systemie forumowym Reddit, zbudowana w architekturze MVC.",
+  "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon --legacy-watch src/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "Mateusz Dziedzic",
+  "license": "MIT",
   "dependencies": {
     "connect-mongo": "^6.0.0",
     "dotenv": "^17.2.3",

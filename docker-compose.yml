@@ -3,7 +3,7 @@ services:
     build: .
     container_name: f104-app
     ports:
-      - "8080:8080"   # backend dostępny na localhost:3500
+      - "8080:8080" 
     environment:
       - MONGO_URI=${MONGO_URI}
     depends_on:
@@ -11,14 +11,14 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    #command: ["npm", "run", "start"]  # start produkcyjny
-    command: ["npm", "run", "dev"] # odkomentuj dla dev z nodemon
+    command: ["npm", "run", "start"]  # start produkcyjny
+    #command: ["npm", "run", "dev"] # odkomentuj dla dev z nodemon
 
   mongo:
     image: mongo:6.0
     container_name: f104-mongo
     ports:
-      - "27018:27017"   # Mongo dostępne w Compass na localhost:27018
+      - "27018:27017" 
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}

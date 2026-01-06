@@ -12,6 +12,5 @@ router.use("/auth", authRouter);
 
 router.get("/", mainController.getCommunities);
 router.get("/about", mainController.getAbout);
-router.get("/user/:username", mainController.getProfile);
 
 module.exports = router;

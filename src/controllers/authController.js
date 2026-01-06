@@ -1,5 +1,4 @@
 const authModel = require("../models/authModel");
-const { encodeObjectId, decodeObjectId } = require("../utils/objectIdBase62");
 
 async function getLogin(req, res) {
     const validator = {

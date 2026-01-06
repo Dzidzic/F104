@@ -1,27 +1,37 @@
-<h1>Społeczności</h1>
+<h1 class="pageTitle">Odkrywaj społeczności</h1>
 
 <% if (communities.length === 0) { %>
-    <p>Brak społeczności</p>
+    <div class="exploreEmpty">
+        <p>Brak społeczności do wyświetlenia. Może czas stworzyć własną?</p>
+    </div>
 <% } else { %>
-    <ul class="communities-list">
+    <div class="exploreWrapper">
         <% communities.forEach(community => { %>
-            <li class="community-item">
-                <h2>
-                    <a href="/c/<%= community.urlId %>">
-                        c/<%= community.name %>
-                    </a>
-                </h2>
-
-                <p><%= community.description %></p>
-
-                <% if (community.theme) { %>
-                    <div class="theme">
-                        <a href="/c?theme=<%= community.theme %>" class="theme">
-                            <%= community.theme %>
-                        </a>
+            <div class="exploreCard">
+                <div class="exploreContent">
+                    <div class="exploreHeader">
+                        <h2 class="exploreName">
+                            <a href="/c/<%= community.urlId %>">
+                                c/<%= community.name %>
+                            </a>
+                        </h2>
                     </div>
-                <% } %>
-            </li>
+
+                    <p class="exploreDesc"><%= community.description %></p>
+
+                    <% if (community.theme) { %>
+                        <div class="exploreThemeBox">
+                            <a href="/c?theme=<%= community.theme %>" class="exploreTag">
+                                <%= community.theme %>
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+                
+                <div class="exploreAction">
+                    <a href="/c/<%= community.urlId %>" class="exploreViewBtn">Zobacz</a>
+                </div>
+            </div>
         <% }) %>
-    </ul>
+    </div>
 <% } %>
