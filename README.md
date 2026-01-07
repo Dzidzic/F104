@@ -51,7 +51,6 @@ Platforma społecznościowa umożliwiająca tworzenie społeczności, publikowan
 | **POST** | `/c/:commId/post/:postId/edit` | Zaktualizowanie treści posta |
 | **POST** | `/c/:commId/post/:postId/like` | Polubienie posta |
 | **POST** | `/c/:commId/post/:postId/delete` | Usunięcie posta |
-| **POST** | `/post/like` | Polubienie posta (AJAX/Redirect) |
 | **GET** | `/auth/login` | Formularz logowania |
 | **POST** | `/auth/login` | Proces logowania |
 | **GET** | `/auth/register` | Formularz rejestracji |
